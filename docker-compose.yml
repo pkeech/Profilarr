@@ -1,0 +1,25 @@
+## DEFINE VERSION
+version: '3.8'
+
+## DEFINE SERVICES
+services:
+
+  ## PROFILARR (WEB UI)
+  profilarr:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+      target: dev
+    image: profilarr:dev
+    restart: unless-stopped 
+    ports:
+      - 8080:8080
+    volumes:
+      #- profilarr:/app/profilarr
+      - ./app:/app/profilarr
+    env_file:
+      - ".env" 
+
+## DEFINE VOLUMES
+volumes:
+  profilarr: {}
